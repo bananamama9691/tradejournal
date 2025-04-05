@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Page loaded");
-
   // === Trade Logging + Chart Update ===
   const form = document.getElementById("trade-form");
   const tradeList = document.getElementById("trade-list");
@@ -10,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const plChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: [], // initially empty
+      labels: [],
       datasets: [{
         label: "Profit/Loss ($)",
-        data: [],  // initially empty
+        data: [],
         borderColor: "rgb(75, 192, 192)",
         backgroundColor: "rgba(75, 192, 192, 0.1)",
         fill: true,
@@ -32,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-
     const ticker = document.getElementById("ticker").value;
     const pl = parseFloat(document.getElementById("pl").value);
     const date = document.getElementById("date").value;
+
+    console.log("Form submitted:", ticker, pl, date);  // Log form submission data
 
     // Add to trade list
     const tradeItem = document.createElement("div");
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tradeItem.innerHTML = `<strong>${ticker}</strong> - $${pl} on ${date}`;
     tradeList.appendChild(tradeItem);
 
-    // Add to chart (update labels and data)
+    // Add to chart
     plChart.data.labels.push(`${ticker} (${date})`);
     plChart.data.datasets[0].data.push(pl);
     plChart.update();
