@@ -3,33 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chart Test</title>
+  <title>Trade Journal</title>
 
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <h1>Chart Test Page</h1>
 
-  <!-- Chart Container -->
-  <canvas id="myChart" width="400" height="200"></canvas>
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
+  <!-- Custom JS -->
+  <script src="script.js" defer></script>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Initialize Chart.js chart
-    const ctx = document.getElementById("myChart").getContext("2d");
-    const myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-        datasets: [{
-          label: 'Example Data',
-          data: [12, 19, 3, 5, 2],
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          fill: true
-        }]
-      }
-    });
+    AOS.init({ duration: 800, once: true });
   </script>
+</head>
+<body class="bg-gray-100">
+
+  <div class="flex h-screen">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md p-4" data-aos="fade-right">
+      <h2 class="text-xl font-bold mb-6">TradeTracker</h2>
+      <nav class="space-y-3">
+        <a href="#" class="block text-gray-700 hover:text-black">Dashboard</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Journal</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Analytics</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-y-auto">
+      
+      <!-- Topbar -->
+      <header class="bg-white p-4 shadow" data-aos="fade-down">
+        <h1 class="text-xl font-semibold">Dashboard</h1>
+      </header>
+
+      <!-- Main section -->
+      <main class="flex-1 p-6 space-y-10">
+        <p class="text-gray-700" data-aos="fade-up">Welcome to your trading journal. Let’s log your trades!</p>
+
+        <!-- Trade Form -->
+        <form id="trade-form" class="bg-white p-6 rounded shadow max-w-md space-y-4" data-aos="zoom-in">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Ticker</label>
+            <input type="text" id="ticker" class="w-full border p-2 rounded" placeholder="e.g. AAPL" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Profit / Loss ($)</label>
+            <input type="number" id="pl" class="w-full border p-2 rounded" placeholder="e.g. 120 or -50" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Date</label>
+            <input type="date" id="date" class="w-full border p-2 rounded" required />
+          </div>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add Trade</button>
+        </form>
+
+        <!-- Trade P/L Chart -->
+        <div class="max-w-md bg-white p-4 rounded shadow" data-aos="fade-up">
+          <h2 class="text-lg font-bold mb-4">📈 Trade P/L Chart</h2>
+          <canvas id="plChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Trade List -->
+        <div id="trade-list" class="space-y-2 max-w-md" data-aos="fade-up"></div>
+
+        <!-- Win Rate Tracker -->
+        <div class="bg-white p-4 rounded shadow max-w-md" data-aos="zoom-in-up">
+          <h2 class="text-lg font-bold mb-4">📊 Win Rate Tracker</h2>
+          <form id="tradeForm" class="space-y-4">
+            <label class="block">
+              Result:
+              <select id="tradeResult" class="w-full border p-2 rounded mt-1">
+                <option value="win">Win</option>
+                <option value="loss">Loss</option>
+              </select>
+            </label>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Add Trade</button>
+          </form>
+
+          <div id="stats" class="mt-4 text-sm text-gray-800">
+            <p>Total Trades: 0</p>
+            <p>Wins: 0</p>
+            <p>Losses: 0</p>
+            <p>Win Rate: 0%</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
 </body>
 </html>
