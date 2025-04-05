@@ -53,28 +53,32 @@
 
         <!-- Trade entries go here -->
         <div id="trade-list" class="mt-6 space-y-2 max-w-md"></div>
-      </main>
+      </main><!-- Win Rate Tracker -->
+<div class="mt-10 bg-white p-4 rounded shadow max-w-md">
+  <h2 class="text-lg font-bold mb-4">📊 Win Rate Tracker</h2>
+  <form id="tradeForm" class="space-y-4">
+    <label class="block">
+      Result:
+      <select id="tradeResult" class="w-full border p-2 rounded mt-1">
+        <option value="win">Win</option>
+        <option value="loss">Loss</option>
+      </select>
+    </label>
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Trade</button>
+  </form>
+
+  <div id="stats" class="mt-4 text-sm text-gray-800">
+    <p>Total Trades: 0</p>
+    <p>Wins: 0</p>
+    <p>Losses: 0</p>
+    <p>Win Rate: 0%</p>
+  </div>
+</div>
+
 
     </div>
   </div>
 
 </body>
-</html>
-<h2>📊 Win Rate Tracker</h2>
-<form id="tradeForm">
-  <label>
-    Result:
-    <select id="tradeResult">
-      <option value="win">Win</option>
-      <option value="loss">Loss</option>
-    </select>
-  </label>
-  <button type="submit">Add Trade</button>
-</form>
 
-<div id="stats">
-  <p>Total Trades: 0</p>
-  <p>Wins: 0</p>
-  <p>Losses: 0</p>
-  <p>Win Rate: 0%</p>
-</div>
+
