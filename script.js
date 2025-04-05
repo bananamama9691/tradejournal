@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // === Trade Logging + Chart Update ===
   const form = document.getElementById("trade-form");
-  const tradeList = document.getElementById("trade-list");
+  const tradeHistory = document.getElementById("trade-history");
 
   // Chart.js setup
   const ctx = document.getElementById("plChart").getContext("2d");
@@ -30,17 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
     const ticker = document.getElementById("ticker").value;
     const pl = parseFloat(document.getElementById("pl").value);
     const date = document.getElementById("date").value;
 
-    console.log("Form submitted:", ticker, pl, date);  // Log form submission data
-
-    // Add to trade list
+    // Add to trade history list
     const tradeItem = document.createElement("div");
     tradeItem.className = "p-3 bg-gray-50 border rounded shadow";
-    tradeItem.innerHTML = `<strong>${ticker}</strong> - $${pl} on ${date}`;
-    tradeList.appendChild(tradeItem);
+    tradeItem.innerHTML = `<strong>${ticker}</strong> - $${pl} on ${date} <button class="text-red-600 ml-4" onclick="deleteTrade(this)">Delete</button>`;
+    tradeHistory.appendChild(tradeItem);
 
     // Add to chart
     plChart.data.labels.push(`${ticker} (${date})`);
@@ -49,4 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.reset();
   });
+
+  // Delete trade functionality
+  window.deleteTrade = function(button) {
+    const tradeItem = button.parentElement;
+    tradeHistory.removeChild(tradeItem);
+
+    // Remove corresponding chart data
+    const tradeIndex = Array.from(tradeHistory.children).indexOf(tradeItem);
+    plChart.data.labels.splice(tradeIndex, 1);
+    plChart.data.datasets[0].data.splice(tradeIndex, 1);
+    plChart.update();
+  };
 });
