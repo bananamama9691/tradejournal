@@ -107,5 +107,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // === Animations (AOS) ===
   AOS.init({ duration: 800, once: true });
-
 });
