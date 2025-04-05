@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const plChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: [],
+      labels: [], // initially empty
       datasets: [{
         label: "Profit/Loss ($)",
-        data: [],
+        data: [],  // initially empty
         borderColor: "rgb(75, 192, 192)",
         backgroundColor: "rgba(75, 192, 192, 0.1)",
         fill: true,
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tradeItem.innerHTML = `<strong>${ticker}</strong> - $${pl} on ${date}`;
     tradeList.appendChild(tradeItem);
 
-    // Add to chart
+    // Add to chart (update labels and data)
     plChart.data.labels.push(`${ticker} (${date})`);
     plChart.data.datasets[0].data.push(pl);
     plChart.update();
