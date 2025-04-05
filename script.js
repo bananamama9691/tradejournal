@@ -48,4 +48,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.reset();
   });
+
+  // === Win Rate Tracker ===
+  let totalTrades = 0;
+  let wins = 0;
+  let losses = 0;
+
+  document.getElementById("tradeForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const result = document.getElementById("tradeResult").value;
+
+    totalTrades++;
+    if (result === "win") {
+      wins++;
+    } else {
+      losses++;
+    }
+
+    updateStats();
+  });
+
+  function updateStats() {
+    const winRate = totalTrades ? ((wins / totalTrades) * 100).toFixed(2) : 0;
+
+    document.getElementById("stats").innerHTML = `
+      <p>Total Trades: ${totalTrades}</p>
+      <p>Wins: ${wins}</p>
+      <p>Losses: ${losses}</p>
+      <p>Win Rate: ${winRate}%</p>
+    `;
+  }
 });
