@@ -3,12 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test</title>
+  <title>Chart Test</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Test Page</h1>
-  <button id="test-button">Click Me</button>
+  <h1>Chart Test Page</h1>
 
-  <script src="script.js"></script>
+  <!-- Chart Container -->
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    // Initialize Chart.js chart
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: 'Example Data',
+          data: [12, 19, 3, 5, 2],
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true
+        }]
+      }
+    });
+  </script>
 </body>
 </html>
