@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade Journal</title>
+  <script src="script.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <div class="flex h-screen">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md p-4">
+      <h2 class="text-xl font-bold mb-6">TradeTracker</h2>
+      <nav class="space-y-3">
+        <a href="#" class="block text-gray-700 hover:text-black">Dashboard</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Journal</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Analytics</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Content -->
+    <div class="flex-1 flex flex-col">
+      
+      <!-- Topbar -->
+      <header class="bg-white p-4 shadow">
+        <h1 class="text-xl font-semibold">Dashboard</h1>
+      </header>
+
+      <!-- Main content -->
+      <main class="flex-1 p-6">
+        <p class="text-gray-700">Welcome to your trading journal. Let’s log your trades!</p>
+
+        <!-- Add Trade Form -->
+        <form id="trade-form" class="mt-6 space-y-4 bg-white p-4 rounded shadow max-w-md">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Ticker</label>
+            <input type="text" id="ticker" class="w-full border p-2 rounded" placeholder="e.g. AAPL" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Profit / Loss ($)</label>
+            <input type="number" id="pl" class="w-full border p-2 rounded" placeholder="e.g. 120 or -50" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Date</label>
+            <input type="date" id="date" class="w-full border p-2 rounded" required />
+          </div>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Trade</button>
+        </form>
+
+        <!-- Trade entries go here -->
+        <div id="trade-list" class="mt-6 space-y-2 max-w-md"></div>
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>
